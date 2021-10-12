@@ -1,0 +1,2 @@
+// Construir la imagen
+docker build -t angular-11-alpine .

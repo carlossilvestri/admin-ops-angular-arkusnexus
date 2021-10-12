@@ -1,0 +1,18 @@
+.cont-img-logo{
+    text-align: center;
+    padding: 20px 0;
+    @media (max-width: 620px){
+        img{
+            max-width: 200px;
+        }
+    }
+    .sub-title-header{
+        padding: 20px;
+        margin: 0;
+        @media (max-width: 620px){
+            padding: 10px 2px 0 2px;
+            margin: 0;
+            font-size: 15px;
+        }
+    }
+}

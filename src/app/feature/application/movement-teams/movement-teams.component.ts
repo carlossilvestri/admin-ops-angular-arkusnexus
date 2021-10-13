@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovementTeamsComponent implements OnInit {
 
+  filterBy: string = 'TEAM';
   constructor() { }
 
   ngOnInit(): void {
+  }
+  changeFilter(text : string): void {
+    this.filterBy = text;
+  }
+  onChangeRadioButton(event: any) {
+    this.changeFilter(event.target.value);
   }
 
 }

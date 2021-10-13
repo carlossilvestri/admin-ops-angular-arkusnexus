@@ -14,7 +14,18 @@ export class ApplicationBarComponent implements OnInit {
   ngOnInit(): void {
   }
   onCloseSession() : void{
-    this.router.navigate(['/']);
+    Swal.fire({
+      title: '¿Estás seguro/a?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/']);
+      }
+    });
   }
 
 }

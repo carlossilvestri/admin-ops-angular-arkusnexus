@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ApplicationRoutingModule } from './application-routing.module';
+// import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyUserComponent } from './my-user/my-user.component';
 import { ApplicationBarComponent } from './shared/components/application-bar/application-bar.component';
@@ -38,7 +39,8 @@ import { TeamComponent } from './teams/team/team.component';
     ApplicationRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    // MaterialModule
   ]
 })
 

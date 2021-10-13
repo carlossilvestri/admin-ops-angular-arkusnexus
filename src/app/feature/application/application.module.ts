@@ -13,6 +13,9 @@ import { UsersComponent } from './users/users.component';
 import { AccountsComponent } from './accounts/accounts.component';
 import { MovementTeamsComponent } from './movement-teams/movement-teams.component';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
+import { MovementTeamComponent } from './movement-teams/movement-team/movement-team.component';
+import { AccountComponent } from './accounts/account/account.component';
+import { TeamComponent } from './teams/team/team.component';
 
 @NgModule({
   declarations: [
@@ -23,9 +26,12 @@ import { SearchBarComponent } from './shared/components/search-bar/search-bar.co
     ApplicationComponent,
     TeamsComponent,
     UsersComponent,
-    AccountsComponent,
+    SearchBarComponent,
     MovementTeamsComponent,
-    SearchBarComponent
+    MovementTeamComponent,
+    AccountsComponent,
+    AccountComponent,
+    TeamComponent
   ],
   imports: [
     CommonModule,

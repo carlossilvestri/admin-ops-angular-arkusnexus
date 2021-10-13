@@ -1,0 +1,58 @@
+.barra-container {
+    position: relative;
+    margin-bottom: 0;
+    // margin-top: 20px;
+    @media (max-width: 840px) {
+      margin-bottom: 10px;
+    }
+    .btn-buscar {
+      position: absolute;
+      top: 8%;
+      right: 8%;
+      height: 85%;
+      padding: 0;
+      display: block;
+      text-indent: -9999px;
+      width: 20px;
+      /// background-image: url(../../../assets/img/botones/buscar-vale.svg);
+      background-position: right center;
+      background-repeat: no-repeat;
+      border: none;
+      background-color: #f7f9fa;
+      border-radius: 10px;
+      border-style: none;
+      @media (max-width: 840px) {
+        right: 7%;
+        top: 6%;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+    .barra-buscar {
+      width: 531px;
+      height: 38px;
+      background: #f7f9fa;
+      border-radius: 10px;
+      border-style: none;
+      padding-left: 55px;
+      padding-right: 55px;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 21px;
+      // margin: 0 195px 0 0px;
+      margin-right: 20px;
+      &:focus {
+        outline: none;
+      }
+      @media (max-width: 840px) {
+        width: 100%;
+        margin: 0;
+      }
+    }
+  }

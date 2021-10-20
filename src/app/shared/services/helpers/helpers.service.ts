@@ -7,18 +7,18 @@ export class HelpersService {
 
   constructor() { }
   /*
-  Doc: guardarStorage. Guarda cualquier campo con su respectivo obj en el localstorage.
+  Doc: saveOnLocalStorage. Guarda cualquier campo con su respectivo obj en el localstorage.
   Param: campo: string, objeto: any
   */
-  guardarStorage(campo: string, objeto: any): void {
+  saveOnLocalStorage(campo: string, objeto: any): void {
     const objEnString: string = JSON.stringify(objeto);
     localStorage.setItem(campo, objEnString);
   }
   /*
-  Doc: eliminarCampoLocalStorage. Eliminar cualquier campo del localstorage.
+  Doc: removeFieldLocalStorage. Eliminar cualquier campo del localstorage.
   Param: campoAEliminar: string
   */
-  eliminarCampoLocalStorage(campoAEliminar: string): void {
+  removeFieldLocalStorage(campoAEliminar: string): void {
     localStorage.removeItem(campoAEliminar);
   }
   /*

@@ -4,8 +4,9 @@ import { Role } from "./role-requests.interface";
 
 export interface CreateUserResponse {
     ok:    boolean;
-    token: string;
-    user:  User;
+    token?: string;
+    user?:  User;
+    msg?: string
 }
 export interface CreateUserRequest {
     email:              string;
@@ -19,8 +20,9 @@ export interface CreateUserRequest {
     id_role_f:          number;
 }
 export interface LoginUserResponse {
-    token: string;
-    user:  User;
+    token?: string;
+    user?:  User;
+    msg?:   string;
 }
 export interface LoginUserRequest {
     email:     string;
@@ -46,6 +48,7 @@ export interface UpdateUserRequest {
     id_english_level_f: number;
     id_role_f:          number;
     token:              string;
+    id_user:            number;
 }
 export interface GetUsersResponse {
     ok:                             boolean;

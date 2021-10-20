@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { UserService } from '../../../../../shared/services/user/user.service';
 
 @Component({
   selector: 'app-application-bar',
@@ -9,7 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class ApplicationBarComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public userService : UserService) { }
 
   ngOnInit(): void {
   }
@@ -23,7 +24,7 @@ export class ApplicationBarComponent implements OnInit {
       confirmButtonText: 'Sí',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.router.navigate(['/']);
+        this.userService.logOut();
       }
     });
   }

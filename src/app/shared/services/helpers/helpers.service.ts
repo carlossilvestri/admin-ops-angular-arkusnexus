@@ -22,10 +22,10 @@ export class HelpersService {
     localStorage.removeItem(campoAEliminar);
   }
   /*
-  Doc: cargarStorage. Carga en una variable cualquier campo del localstorage.
+  Doc: getFromLocalStorage. Carga en una variable cualquier campo del localstorage.
   Param: campoASolicitar: string
   */
-  cargarStorage(campoASolicitar: string) {
+  getFromLocalStorage(campoASolicitar: string) {
     var campo: any;
     if (localStorage.getItem(campoASolicitar)) {
       campo = JSON.parse(localStorage.getItem(campoASolicitar));

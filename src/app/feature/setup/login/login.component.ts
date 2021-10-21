@@ -9,6 +9,8 @@ import {
 } from '@angular/forms';
 import { UserService } from '../../../shared/services/user/user.service';
 import { LoginUserRequest } from '../../../core/interfaces/user-requests.interface';
+import { RoleService } from '../../../shared/services/role/role.service';
+import { LevelService } from 'src/app/shared/services/level/level.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,9 @@ export class LoginComponent implements OnInit {
   constructor(
     public router: Router,
     private fb: FormBuilder,
-    public userService: UserService
+    public userService: UserService,
+    public roleService: RoleService,
+    public levelService: LevelService
   ) {}
 
   ngOnInit(): void {
@@ -44,8 +48,10 @@ export class LoginComponent implements OnInit {
       password: this.forma.value.password,
     };
     const loginCall = this.userService.login(loginData);
+    const getRoles = this.roleService.getRoles();
+    const getLevels = this.levelService.getLevels();
     // Hacer las 2 llamadas al mismo tiempo.
-    forkJoin([loginCall]).subscribe((results) => {
+    forkJoin([loginCall, getRoles, getLevels]).subscribe((results) => {
       // For debugging.
       console.log('results  ', results );
       this.router.navigate(['/application/my-user']);

@@ -5,6 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Level } from 'src/app/core/interfaces/level-requests.interface';
+import { LevelService } from 'src/app/shared/services/level/level.service';
 import { UserService } from 'src/app/shared/services/user/user.service';
 @Component({
   selector: 'app-create-account',
@@ -15,14 +17,20 @@ import { UserService } from 'src/app/shared/services/user/user.service';
   ],
 })
 export class CreateAccountComponent implements OnInit {
+    /* =============================
+                VARIABLES
+     =============================
+  */
+  levels: Level[];
   forma: FormGroup;
-  constructor(private fb: FormBuilder, public userService: UserService) {}
+  constructor(private fb: FormBuilder, public userService: UserService, public levelService: LevelService) {}
 
   ngOnInit(): void {
     this.initFields();
   }
   initFields(): void {
     this.initForm();
+    this.fetchLevelsByLocalStorage();
   }
   initForm() {
     this.forma = this.fb.group({
@@ -37,5 +45,25 @@ export class CreateAccountComponent implements OnInit {
       ],
       password: ['', [Validators.required, Validators.minLength(3)]],
     });
+  }
+  fetchLevelsByLocalStorage() : void{
+    this.levels = this.levelService.getRolesByLocalStorage();
+    if(!this.levels){
+      this.fetchLevels();
+    }
+  }
+  fetchLevels() : void {
+    this.levelService.getLevels().subscribe(
+      (resp) => {
+        this.levels = resp.levels;
+      },
+      /*
+      (err) => {
+        console.log('err ', err);
+        this.loadingUsers = false;
+        this.thereWasAnError = true;
+      }
+      */
+    );
   }
 }

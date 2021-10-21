@@ -37,7 +37,7 @@
               <br />
               <div class="form-control border-0 form-control-changes text-start">
                   <h5>Nivel de Inglés</h5>
-                <div class="form-check">
+                <div class="form-check" *ngFor="let level of levels">
                   <input
                     class="form-check-input"
                     type="radio"
@@ -45,32 +45,9 @@
                     id="flexRadioDefault1"
                   />
                   <label class="form-check-label" for="flexRadioDefault1">
-                    Bajo
+                    {{ level.name }}
                   </label>
                 </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault2"
-                    checked
-                  />
-                  <label class="form-check-label" for="flexRadioDefault2">
-                    Medio
-                  </label>
-                </div>
-                <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="flexRadioDefault"
-                      id="flexRadioDefault3"
-                    />
-                    <label class="form-check-label" for="flexRadioDefault3">
-                      Alto
-                    </label>
-                  </div>
               </div>
               <input
                 class="form-control border-0"

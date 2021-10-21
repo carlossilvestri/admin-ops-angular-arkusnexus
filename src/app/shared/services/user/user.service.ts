@@ -14,6 +14,7 @@ import {
   LoginUserResponse,
   UpdateUserRequest,
   UpdateUserResponse,
+  User,
   UserByIdResponse,
 } from 'src/app/core/interfaces/user-requests.interface';
 
@@ -63,10 +64,10 @@ export class UserService {
   }
   /**
    * Get a list of users registered on the system.
-   * @param desde: string
+   * @param desde: number
    * @returns Observable<GetUsersResponse>
    */
-  getUsers(desde: string): Observable<GetUsersResponse> {
+  getUsers(desde: number): Observable<GetUsersResponse> {
     const url = `${this.url}/users?desde=${desde}`;
     return this.http.get<GetUsersResponse>(url).pipe(
       map((resp: GetUsersResponse) => {
@@ -75,6 +76,14 @@ export class UserService {
       })
     );
   }
+    /**
+   * Get the user logged on the Local Storage.
+   * @returns User[]
+   */
+    getUserByLocalStorage(): User {
+      console.log("user ", this.helpers.getFromLocalStorage('user'));
+      return this.helpers.getFromLocalStorage('user');
+    }
   /**
    * Get a list of users registered on the system.
    * @param id_user: number
@@ -108,6 +117,7 @@ export class UserService {
   logOut(): void {
     this.helpers.removeFieldLocalStorage('user');
     this.helpers.removeFieldLocalStorage('token');
+    this.helpers.removeFieldLocalStorage('roles');
     this.router.navigate(['/login']);
   }
 }

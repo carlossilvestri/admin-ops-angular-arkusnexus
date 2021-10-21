@@ -1,46 +1,28 @@
 <div class="cont-my-user">
     <div class="input-group input-group-sm m-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">Nombre*</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [value]="user.name">
       </div>
       <div class="input-group input-group-sm m-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">Email*</span>
-        <input type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        <input type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [value]="user.email">
       </div>
-      <div class="dropdown m-3">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          Rol*
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Normal</a></li>
-          <li><a class="dropdown-item" href="#">Admin</a></li>
-          <li><a class="dropdown-item" href="#">Super Admin</a></li>
-        </ul>
-      </div>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Select a Role</option>
+        <option [value]="role.id_role" *ngFor="let role of roles" [selected]="user.Role.name === role.name">{{ role.name }}</option>
+      </select>
       <div class=" m-3">
         <h3 class="form-check-label">Nivel de Inglés*</h3>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+        <div class="form-check" *ngFor="let level of levels">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" [checked]="user.Level.name === level.name">
             <label class="form-check-label" for="flexRadioDefault1">
-              Bajo
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-            <label class="form-check-label" for="flexRadioDefault2">
-              Medio
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-            <label class="form-check-label" for="flexRadioDefault3">
-              Alto
+              {{ level.name }}
             </label>
           </div>
       </div>
       <div class="input-group input-group-sm m-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">Link CV (Google Doc)</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [value]="user.technical_knoledge">
       </div>
       <div class="d-flex align-items-center justify-content-center">
         <button type="button" class="btn btn-outline-success">Guardar</button>

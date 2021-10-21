@@ -12,17 +12,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>otto@mdo.com</td>
-            <td>Adm</td>
-            <td>Alto</td>
-            <td>
-                <button type="button" class="btn btn-primary m-1">Editar</button>
-                <button type="button" class="btn btn-danger m-1">Deshabilitar</button>
-            </td>
-          </tr>
+          <ng-container *ngIf="!loadingUsers">
+            <tr *ngFor="let user of users; let i = index;">
+              <th scope="row">{{ (i + 1) }}</th>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.Role.name }}</td>
+              <td>{{ user.Level.name }}</td>
+              <td>
+                  <button type="button" class="btn btn-primary m-1">Editar</button>
+                  <button type="button" class="btn btn-danger m-1">Deshabilitar</button>
+              </td>
+            </tr>
+          </ng-container>
+          <ng-container *ngIf="loadingUsers">
+            <app-loading></app-loading>
+          </ng-container>
         </tbody>
       </table>
       <app-pagination></app-pagination>

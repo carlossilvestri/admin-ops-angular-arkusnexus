@@ -12,6 +12,8 @@ import {
   GetUsersResponse,
   LoginUserRequest,
   LoginUserResponse,
+  UpdateIsActiveUserRequest,
+  UpdateIsActiveUserResponse,
   UpdateUserRequest,
   UpdateUserResponse,
   User,
@@ -98,7 +100,20 @@ export class UserService {
     );
   }
   /**
-   * Log the user in the system. And save token on locall storage if login is susccess.
+   * Get a list of users by name and is_active_user = true
+   * @param desde: number, name: string
+   * @returns Observable<GetUsersResponse>
+   */
+  getUsersByName(desde: number, name: string): Observable<GetUsersResponse> {
+    const url = `${this.url}/users-by-name?desde=${desde}&name=${name}`;
+    return this.http.get<GetUsersResponse>(url).pipe(
+      map((resp: GetUsersResponse) => {
+        return resp;
+      })
+    );
+  }
+  /**
+   * Edit all fields of the user.
    * @param dataEditUser: UpdateUserRequest
    * @returns Observable<UpdateUserResponse>
    */
@@ -106,10 +121,27 @@ export class UserService {
     const url = `${this.url}/user/${dataEditUser.id_user}`;
     return this.http.put<UpdateUserResponse>(url, dataEditUser).pipe(
       map((resp: UpdateUserResponse) => {
+        this.helpers.saveOnLocalStorage('user', resp.user);
+        Swal.fire('Correcto', 'Se ha editado correctamente.', 'success');
         return resp;
       })
     );
   }
+    /**
+   * Log the user in the system. And save token on locall storage if login is susccess.
+   * @param dataEditUser: UpdateIsActiveUserRequest
+   * @returns Observable<UpdateIsActiveUserResponse>
+   */
+    updateIsActiveUser(dataEditUser: UpdateIsActiveUserRequest): Observable<UpdateIsActiveUserResponse> {
+      const url = `${this.url}/disable-user/${dataEditUser.id_user}`;
+      return this.http.patch<UpdateIsActiveUserResponse>(url, dataEditUser).pipe(
+        map((resp: UpdateIsActiveUserResponse) => {
+          this.helpers.saveOnLocalStorage('user', resp.user);
+          Swal.fire('Correcto', 'Acción completada.', 'success');
+          return resp;
+        })
+      );
+    }
   /**
    * logOut. Logs out the user, removing some fields of Local Storage, and moving the user to login.
    * @return void

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,14 @@ export class HelpersService {
       campo = null;
     }
     return campo;
+  }
+   /*
+  Doc: Dice si el campo es invalido valiendose de cualquier campo del array [Validator]
+  Parametros: campo: string, forma: FormGroup
+  Regresa un booleano.
+  */
+  campoNoEsValido(campo: string, forma: FormGroup): boolean {
+    return forma.controls[campo].errors && forma.controls[campo].touched;
   }
   
 }

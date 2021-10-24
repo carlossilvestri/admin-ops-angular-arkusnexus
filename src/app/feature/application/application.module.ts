@@ -17,6 +17,7 @@ import { SearchBarComponent } from './shared/components/search-bar/search-bar.co
 import { MovementTeamComponent } from './movement-teams/movement-team/movement-team.component';
 import { AccountComponent } from './accounts/account/account.component';
 import { TeamComponent } from './teams/team/team.component';
+import { LoadingComponent } from '../../shared/components/loading/loading.component'; 
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TeamComponent } from './teams/team/team.component';
     MovementTeamComponent,
     AccountsComponent,
     AccountComponent,
-    TeamComponent
+    TeamComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,

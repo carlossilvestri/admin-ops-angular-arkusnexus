@@ -14,8 +14,8 @@ export interface CreateUserRequest {
     name:               string;
     link_cv:            string;
     is_active_user:     boolean;
-    createdAt:          Date;
-    updatedAt:          Date;
+    createdAt?:          Date;
+    updatedAt?:          Date;
     id_english_level_f: number;
     id_role_f:          number;
 }
@@ -43,19 +43,29 @@ export interface UpdateUserRequest {
     name:               string;
     link_cv:            string;
     is_active_user:     boolean;
-    createdAt:          Date;
-    updatedAt:          Date;
+    createdAt?:          Date;
+    updatedAt?:          Date;
     id_english_level_f: number;
     id_role_f:          number;
     token:              string;
     id_user:            number;
+    password:           string;
 }
 export interface GetUsersResponse {
     ok:                             boolean;
     users_quantity_for_the_request: number;
     users:                          User[];
 }
-
+export interface UpdateIsActiveUserResponse {
+    ok:   boolean;
+    msg:   string;
+    user: User;
+}
+export interface UpdateIsActiveUserRequest {
+    is_active_user:     boolean;
+    id_user:            number;
+    token:              string;
+}
 export interface User {
     id_user:            number;
     email:              string;

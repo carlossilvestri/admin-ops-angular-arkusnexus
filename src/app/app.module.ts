@@ -5,9 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
+// import { LoadingComponent } from './shared/components/loading/loading.component'; 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    // LoadingComponent
   ],
   imports: [
     BrowserModule,

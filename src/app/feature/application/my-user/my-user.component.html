@@ -1,30 +1,44 @@
-<div class="cont-my-user">
-    <div class="input-group input-group-sm m-3">
+<form class="cont-my-user" [formGroup]="forma">
+      <div class="input-group input-group-sm m-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">Nombre*</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [value]="user.name">
+        <input formControlName="name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [value]="user.name">
+      </div>
+      <div class="alert alert-danger py-1 mx-3" role="alert" *ngIf="campoNoEsValido('name')">
+        Mínimo 2 carácteres
       </div>
       <div class="input-group input-group-sm m-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">Email*</span>
-        <input type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [value]="user.email">
+        <input disabled formControlName="email" type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [value]="user.email">
       </div>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Select a Role</option>
+      <div class="input-group input-group-sm m-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Password</span>
+        <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" type="password" class="form-control" placeholder="Dejar vacío si no desea cambiar el password" aria-describedby="inputGroup-sizing-sm">
+      </div>
+      <h6 class="mx-3">Selecciona un rol:</h6>
+      <select class="form-select mx-3" aria-label="Default select example" formControlName="id_role_f">
         <option [value]="role.id_role" *ngFor="let role of roles" [selected]="user.Role.name === role.name">{{ role.name }}</option>
       </select>
       <div class=" m-3">
         <h3 class="form-check-label">Nivel de Inglés*</h3>
         <div class="form-check" *ngFor="let level of levels">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" [checked]="user.Level.name === level.name">
-            <label class="form-check-label" for="flexRadioDefault1">
+            <input (change)="onChangeRandioButton($event)" class="form-check-input" type="radio" name="id_english_level_f" [id]="'level-id-' + level.id_level" [checked]="user.Level.name === level.name" [value]="level.id_level">
+            <label class="form-check-label" [for]="'level-id-' + level.id_level">
               {{ level.name }}
             </label>
           </div>
       </div>
       <div class="input-group input-group-sm m-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">Link CV (Google Doc)</span>
+        <input formControlName="link_cv" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [value]="user.link_cv">
+      </div>
+      <div class="input-group input-group-sm m-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Conocimientos técnicos*</span>
         <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" [value]="user.technical_knoledge">
       </div>
-      <div class="d-flex align-items-center justify-content-center">
-        <button type="button" class="btn btn-outline-success">Guardar</button>
+      <div class="alert alert-danger py-1 mx-3" role="alert" *ngIf="campoNoEsValido('technical_knoledge')">
+        Campo requerido
       </div>
-</div>
+      <div class="d-flex align-items-center justify-content-center">
+        <button type="button" class="btn btn-outline-success" (click)="updateUser()">Guardar</button>
+      </div>
+</form>

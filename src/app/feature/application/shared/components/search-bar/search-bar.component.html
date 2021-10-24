@@ -1,8 +1,10 @@
 <div class="barra-container">
-    <input type="text" class="btn-buscar" />
+    <input type="text" class="btn-buscar" (click)="sendTextToParent(text.value)" />
     <input
       type="search"
       class="barra-buscar"
       [placeholder]="textBar"
+      #text
+      (keyup.enter)="sendTextToParent($event.target.value)"
     />
 </div>

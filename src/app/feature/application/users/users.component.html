@@ -1,5 +1,7 @@
 <div>
-  <app-search-bar [textBar]="'Buscar un usuario...'"></app-search-bar>
+  <app-search-bar [textBar]="'Buscar un usuario por su nombre...'"
+  (changeText)="searchUserByName($event)"
+  ></app-search-bar>
     <table class="table my-2">
         <thead>
           <tr>
@@ -21,14 +23,14 @@
               <td>{{ user.Level.name }}</td>
               <td>
                   <button type="button" class="btn btn-primary m-1">Editar</button>
-                  <button type="button" class="btn btn-danger m-1">Deshabilitar</button>
+                  <button type="button" class="btn btn-danger m-1" (click)="updateIsActiveUser(user)">{{ (user.is_active_user) ? 'Deshabilitar' : 'Habilitar' }}</button>
               </td>
             </tr>
           </ng-container>
-          <ng-container *ngIf="loadingUsers">
-            <app-loading></app-loading>
-          </ng-container>
         </tbody>
       </table>
-      <app-pagination></app-pagination>
+      <ng-container *ngIf="loadingUsers">
+        <app-loading></app-loading>
+      </ng-container>
+      <app-pagination  [page]="desde" (changePage)="updatePage($event)"></app-pagination>
 </div>

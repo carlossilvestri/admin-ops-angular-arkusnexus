@@ -13,53 +13,78 @@
             </div>
             <h3 class="text-logo">Crear Cuenta</h3>
             <br />
-            <form class="text-center">
+            <form class="text-center" [formGroup]="forma">
               <input
-                class="form-control border-0"
+                class="form-control border-0 my-3"
                 type="text"
+                formControlName="name"
                 name=""
                 placeholder="Escribe tu nombre"
               />
-              <br />
+              <div class="alert alert-danger alert-fix" role="alert" *ngIf="campoNoEsValido('name')">
+                Mínimo 2 carácteres
+              </div>
               <input
-                class="form-control border-0"
+                class="form-control border-0 my-3"
                 type="email"
                 name=""
+                formControlName="email"
                 placeholder="Escribe tu email"
               />
-              <br />
+              <div class="alert alert-danger alert-fix" role="alert" *ngIf="campoNoEsValido('email')">
+                Email inválido
+              </div>
               <input
-                class="form-control border-0"
+                class="form-control border-0 my-3"
                 type="password"
                 name=""
+                formControlName="password"
                 placeholder="Escribe tu contraseña"
               />
-              <br />
-              <div class="form-control border-0 form-control-changes text-start">
+              <div class="alert alert-danger alert-fix" role="alert" *ngIf="campoNoEsValido('password')">
+                Contraseña debe ser mayor a 2
+              </div>
+              <div class="form-control border-0 my-3 form-control-changes text-start">
                   <h5>Nivel de Inglés</h5>
                 <div class="form-check" *ngFor="let level of levels">
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="flexRadioDefault"
-                    id="flexRadioDefault1"
+                    name="id_english_level_f"
+                    formControlName="id_english_level_f"
+                    [value]="level.id_level"
+                    [id]="'level-id-' + level.id_level"
                   />
-                  <label class="form-check-label" for="flexRadioDefault1">
+                  <label class="form-check-label" [for]="'level-id-' + level.id_level">
                     {{ level.name }}
                   </label>
                 </div>
+                <div class="alert alert-danger alert-fix" role="alert" *ngIf="campoNoEsValido('id_english_level_f')">
+                  Nivel de Inglés requerido
+                </div>
               </div>
               <input
-                class="form-control border-0"
+                class="form-control border-0 my-3"
                 type="text"
                 name=""
+                formControlName="link_cv"
                 placeholder="Link CV, Google Doc. (Opcional)"
               />
-              <br />
+              <input
+              class="form-control border-0 my-3"
+              type="text"
+              name=""
+              formControlName="technical_knoledge"
+              placeholder="Escribe tus habilidades técnicas"
+            />
+              <div class="alert alert-danger alert-fix" role="alert" *ngIf="campoNoEsValido('technical_knoledge')">
+                Habilidades técnicas requeridas
+              </div>
               <button
-                class="btn btn-primary btn-sm border-0"
+                class="btn btn-primary btn-sm border-0 my-3"
                 type="submit"
                 name="submit"
+                (click)="onCreateAccount()"
               >
                 Crear Cuenta
               </button>

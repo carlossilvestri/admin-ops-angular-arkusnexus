@@ -22,7 +22,7 @@
               <td>{{ user.Role.name }}</td>
               <td>{{ user.Level.name }}</td>
               <td>
-                  <button type="button" class="btn btn-primary m-1">Editar</button>
+                  <button type="button" class="btn btn-primary m-1" [routerLink]="'/application/user/' + user.id_user">Editar</button>
                   <button type="button" class="btn btn-danger m-1" (click)="updateIsActiveUser(user)">{{ (user.is_active_user) ? 'Deshabilitar' : 'Habilitar' }}</button>
               </td>
             </tr>

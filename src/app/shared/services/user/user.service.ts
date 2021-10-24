@@ -117,17 +117,24 @@ export class UserService {
    * @param dataEditUser: UpdateUserRequest
    * @returns Observable<UpdateUserResponse>
    */
-  editUser(dataEditUser: UpdateUserRequest): Observable<UpdateUserResponse> {
-    const url = `${this.url}/user/${dataEditUser.id_user}`;
+  editUser(dataEditUser: UpdateUserRequest, isAdmin: boolean = false): Observable<UpdateUserResponse> {
+    let url = '';
+    if(isAdmin){
+      url =  `${this.url}/edit-any-user/${dataEditUser.id_user}`;
+    }else{
+      url =  `${this.url}/user/${dataEditUser.id_user}`;
+    }
     return this.http.put<UpdateUserResponse>(url, dataEditUser).pipe(
       map((resp: UpdateUserResponse) => {
-        this.helpers.saveOnLocalStorage('user', resp.user);
+        if(!isAdmin){
+          this.helpers.saveOnLocalStorage('user', resp.user);
+        }
         Swal.fire('Correcto', 'Se ha editado correctamente.', 'success');
         return resp;
       })
     );
   }
-    /**
+  /**
    * Log the user in the system. And save token on locall storage if login is susccess.
    * @param dataEditUser: UpdateIsActiveUserRequest
    * @returns Observable<UpdateIsActiveUserResponse>

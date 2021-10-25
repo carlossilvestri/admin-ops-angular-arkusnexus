@@ -1,5 +1,6 @@
 <div>
-  <app-search-bar [textBar]="'Buscar un equipo...'"></app-search-bar>
+  <app-search-bar [textBar]="'Buscar un equipo...'"  (changeText)="searchUserByName($event)"></app-search-bar>
+  <button type="button" class="btn btn-success m-1" routerLink="/application/create-team">Agregar</button>
     <table class="table my-2">
         <thead>
           <tr>
@@ -9,15 +10,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Team 1</td>
-            <td>
-                <button type="button" class="btn btn-primary m-1" routerLink="/application/teams/1">Editar</button>
-                <button type="button" class="btn btn-danger m-1">Deshabilitar</button>
-            </td>
-          </tr>
+          <ng-container *ngIf="!loadingTeams">
+            <tr *ngFor="let team of teams; let i = index;">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{ team.name }}</td>
+              <td>
+                  <button type="button" class="btn btn-primary m-1" [routerLink]="'/application/teams/' + team.id_team">Editar</button>
+                  <button type="button" class="btn btn-danger m-1" (click)="updateIsActiveTeam(team)">{{ (team.is_active) ? 'Deshabilitar' : 'Habilitar' }}</button>
+              </td>
+            </tr>
+          </ng-container>
         </tbody>
       </table>
-      <app-pagination></app-pagination>
+      <ng-container *ngIf="loadingTeams">
+        <app-loading></app-loading>
+      </ng-container>
+      <app-pagination [page]="desde" (changePage)="updatePage($event)"></app-pagination>
 </div>

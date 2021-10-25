@@ -10,6 +10,7 @@ export interface CreateUserResponse {
 }
 export interface CreateUserRequest {
     email:              string;
+    password?:           string;
     technical_knoledge: string;
     name:               string;
     link_cv:            string;

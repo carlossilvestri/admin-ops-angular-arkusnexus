@@ -11,14 +11,14 @@
 					<h3 class="text-logo">Iniciar Sesión</h3>
 					<br>
 					<form class="text-center" ngNativeValidate [formGroup]="forma">
-						<input class="form-control border-0" type="" name="" placeholder="Type Your Username" formControlName="email">
+						<input class="form-control border-0" type="" name="" placeholder="Type Your email" formControlName="email">
 						<div class="alert alert-danger alert-fix" role="alert"  *ngIf="noValidEmail">
 							Email inválido
 						</div>
 						<br>
-						<input class="form-control border-0" type="" name="" placeholder="Type Your Password" formControlName="password">
+						<input class="form-control border-0" type="password" name="" placeholder="Type Your Password" formControlName="password">
 						<div class="alert alert-danger alert-fix" role="alert"  *ngIf="passNoValid">
-							Email inválido
+							Password inválido
 						</div>
 						<br>
 						<button class="btn btn-primary btn-sm border-0" type="submit" name="submit" (click)="onLogin()">Iniciar Sesión</button>

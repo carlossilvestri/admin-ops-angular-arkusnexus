@@ -11,6 +11,8 @@ import { LevelService } from 'src/app/shared/services/level/level.service';
 import { UserService } from 'src/app/shared/services/user/user.service';
 import Swal from 'sweetalert2';
 import { HelpersService } from '../../../shared/services/helpers/helpers.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
@@ -31,7 +33,8 @@ export class CreateAccountComponent implements OnInit {
     private fb: FormBuilder,
     public userService: UserService,
     public levelService: LevelService,
-    public helpersService: HelpersService
+    public helpersService: HelpersService,
+    public router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -97,6 +100,7 @@ export class CreateAccountComponent implements OnInit {
       link_cv:            this.forma.value.link_cv,
       is_active_user:     true,
       id_english_level_f: this.forma.value.id_english_level_f,
+      password:           this.forma.value.password,
       id_role_f:          1 // id_role_f 1 es el que tiene NORMAL 
     };
     // For debugging.
@@ -124,6 +128,7 @@ export class CreateAccountComponent implements OnInit {
   createAccount(createUserAccount: CreateUserRequest) {
     this.userService.createUser(createUserAccount).subscribe((resp) => {
       console.log('resp ', resp);
+      this.router.navigate(['/login']);
     });
   }
 }

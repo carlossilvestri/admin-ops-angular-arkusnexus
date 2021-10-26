@@ -61,7 +61,7 @@ export class MyUserComponent implements OnInit {
       id_role_f: [this.user.id_role_f, [Validators.required]],
       id_english_level_f: [this.user.id_english_level_f, [Validators.required]],
       link_cv: [this.user.link_cv],
-      technical_knoledge: [this.user.technical_knoledge, [Validators.required]],
+      technical_knoledge: [this.user.technical_knoledge, [Validators.required, Validators.minLength(2)]],
     });
     this.loadingUser = false;
   }

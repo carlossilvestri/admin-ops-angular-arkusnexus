@@ -1,31 +1,47 @@
 <div>
-  <app-search-bar [textBar]="'Buscar una cuenta...'"></app-search-bar>
-  <button type="button" class="btn btn-success m-1" routerLink="/application/create-account">Agregar</button>
-    <table class="table my-2">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre de la cuenta</th>
-            <th scope="col">Equipo</th>
-            <th scope="col">Nombre del Cliente</th>
-            <th scope="col">Nombre del Responsable de Operaciones</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>MindTeams</td>
-            <td>Jorge</td>
-            <td>Mario Garcia</td>
-            <td>
-                <button type="button" class="btn btn-primary m-1" routerLink="/application/accounts/1">Editar</button>
-                <button type="button" class="btn btn-danger m-1">Deshabilitar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <app-pagination></app-pagination>
+  <app-search-bar [textBar]="'Buscar una cuenta...'" (changeText)="searchAccountByName($event)"></app-search-bar>
+  <button
+    type="button"
+    class="btn btn-success m-1"
+    routerLink="/application/create-account"
+  >
+    Agregar
+  </button>
+  <table class="table my-2">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre de la cuenta</th>
+        <th scope="col">Equipo</th>
+        <th scope="col">Nombre del Cliente</th>
+        <th scope="col">Nombre del Responsable de Operaciones</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="!loadingAccounts">
+        <tr *ngFor="let account of accounts; let i = index;">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ account.account_name }}</td>
+          <td>{{ account.Team.name }}</td>
+          <td>{{ account.name_client }}</td>
+          <td>{{ account.responsible_operations_name }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-primary m-1"
+              [routerLink]="'/application/accounts/' + account.id_account"
+            >
+              Editar
+            </button>
+            <button type="button" class="btn btn-danger m-1" (click)="updateIsActiveAccount(account)">{{ (account.is_active) ? 'Deshabilitar' : 'Habilitar' }}</button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <ng-container *ngIf="loadingAccounts">
+    <app-loading></app-loading>
+  </ng-container>
+  <app-pagination [page]="desde" (changePage)="updatePage($event)"></app-pagination>
 </div>
-

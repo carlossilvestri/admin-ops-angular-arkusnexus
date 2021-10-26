@@ -122,4 +122,7 @@ export class TeamComponent implements OnInit {
       }
     });
   }
+  campoNoEsValido(campo: string): boolean {
+    return this.helpersService.campoNoEsValido(campo, this.forma);
+  }
 }

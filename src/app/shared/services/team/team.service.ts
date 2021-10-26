@@ -81,7 +81,7 @@ export class TeamService {
    * @param desde: number
    * @returns Observable<GetTeamResponse>
    */
-  getTeams(desde: number): Observable<GetTeamResponse> {
+  getTeams(desde: number = 0): Observable<GetTeamResponse> {
     const url = `${this.url}/team?desde=${desde}`;
     return this.http.get<GetTeamResponse>(url).pipe(
       map((resp: GetTeamResponse) => {

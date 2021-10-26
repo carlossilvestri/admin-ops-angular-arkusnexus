@@ -100,14 +100,14 @@ export class AccountService {
   }
   /**
    * Get a list of accounts by name and is_active = true
-   * @param desde: number, name: string
+   * @param desde: number, account_name: string
    * @returns Observable<GetAccountsByNameResponse>
    */
   getAccountsByName(
     desde: number,
-    name: string
+    account_name: string
   ): Observable<GetAccountsByNameResponse> {
-    const url = `${this.url}/account-by-name?desde=${desde}&name=${name}`;
+    const url = `${this.url}/account-by-name?desde=${desde}&account_name=${account_name}`;
     return this.http.get<GetAccountsByNameResponse>(url).pipe(
       map((resp: GetAccountsByNameResponse) => {
         return resp;

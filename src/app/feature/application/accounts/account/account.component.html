@@ -1,29 +1,38 @@
-<div class="cont-my-user">
+<ng-container *ngIf="!loadingAccount">
+<form class="cont-my-user"  [formGroup]="forma">
     <div class="input-group input-group-sm m-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">Nombre de la cuenta*</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" formControlName="account_name">
+      </div>
+      <div class="alert alert-danger py-1 mx-3" role="alert" *ngIf="campoNoEsValido('account_name')">
+        Mínimo 2 carácteres
+      </div>
+      <select formControlName="id_team" class="form-select mx-3" aria-label="Default select example" *ngIf="!loadingTeam">
+        <option disabled value="0">Selecciona un equipo</option>
+        <option [value]="team.id_team" *ngFor="let team of teams">{{ team.name }}</option>
+      </select>
+      <div class="alert alert-danger py-1 mx-3 my-3" role="alert" *ngIf="campoNoEsValido('id_team')">
+        Campo requerido
       </div>
       <div class="input-group input-group-sm m-3">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Email*</span>
-        <input type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        <span class="input-group-text" id="inputGroup-sizing-sm">Nombre del Cliente*</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" formControlName="name_client">
       </div>
-      <div class="dropdown m-3">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Equipo*</button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Normal</a></li>
-          <li><a class="dropdown-item" href="#">Admin</a></li>
-          <li><a class="dropdown-item" href="#">Super Admin</a></li>
-        </ul>
-      </div>
-      <div class="input-group input-group-sm m-3">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Nombre del Cliente</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+      <div class="alert alert-danger py-1 mx-3" role="alert" *ngIf="campoNoEsValido('name_client')">
+        Mínimo 2 carácteres
       </div>
       <div class="input-group input-group-sm m-3">
         <span class="input-group-text" id="inputGroup-sizing-sm">Nombre del Responsable de Operaciones</span>
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        <input formControlName="responsible_operations_name" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+      </div>
+      <div class="alert alert-danger py-1 mx-3" role="alert" *ngIf="campoNoEsValido('responsible_operations_name')">
+        Mínimo 2 carácteres
       </div>
       <div class="d-flex align-items-center justify-content-center">
-        <button type="button" class="btn btn-outline-success">Guardar</button>
+        <button type="button" class="btn btn-outline-success" (click)="updateTeam()">Guardar</button>
       </div>
-</div>
+</form>
+</ng-container>
+<ng-container *ngIf="loadingAccount">
+  <app-loading></app-loading>
+</ng-container>

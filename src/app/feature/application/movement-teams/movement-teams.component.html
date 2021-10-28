@@ -60,24 +60,29 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <ng-container *ngIf="!loadingTeamUsers">
+      <tr *ngFor="let team_user of team_users; let i = index;">
         <th scope="row">1</th>
-        <td>Mark</td>
-        <td>MindTeams</td>
-        <td>20/01/2021</td>
-        <td>30/06/2021</td>
+        <td>{{ team_user.User.name  }}</td>
+        <td>{{ team_user.Team.name  }}</td>
+        <td>{{ team_user.beggining_date  | date: 'dd/MM/yyyy'  }}</td>
+        <td>{{ team_user.ending_date  | date: 'dd/MM/yyyy' }}</td>
         <td>
           <button
             type="button"
             class="btn btn-primary m-1"
-            routerLink="/application/movement-teams/1"
+            [routerLink]="'/application/movement-teams/' + team_user.id_team_user"
           >
             Editar
           </button>
           <button type="button" class="btn btn-danger m-1">Eliminar</button>
         </td>
       </tr>
+    </ng-container>
     </tbody>
   </table>
-  <app-pagination></app-pagination>
+  <ng-container *ngIf="loadingTeamUsers">
+    <app-loading></app-loading>
+  </ng-container>
+  <app-pagination [page]="desde" (changePage)="updatePage($event)"></app-pagination>
 </div>

@@ -40,11 +40,11 @@
   <div class="d-flex align-items-center justify-content-between">
     <div *ngIf="filterBy === 'BEGGINING_DATE'">
       <h3>Fecha de Inicio</h3>
-      <input type="date" name="" id="">
+      <input type="date" name="" id="" class="my-3" (change)="onChangeBegginingDate($event)">
     </div>
     <div *ngIf="filterBy === 'FINAL_DATE'">
       <h3>Fecha de Finalización</h3>
-      <input type="date" name="" id="">
+      <input type="date" name="" id="" class="my-3" (change)="onChangeEndingDate($event)">
     </div>
   </div>
   <button
@@ -71,8 +71,8 @@
         <th scope="row">1</th>
         <td>{{ team_user.User.name  }}</td>
         <td>{{ team_user.Team.name  }}</td>
-        <td>{{ team_user.beggining_date  | date: 'dd/MM/yyyy'  }}</td>
-        <td>{{ team_user.ending_date  | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ getFormatedDate(team_user.beggining_date)  }} </td>
+        <td>{{ getFormatedDate(team_user.ending_date) }}</td>
         <td>
           <button
             type="button"
@@ -87,6 +87,9 @@
     </ng-container>
     </tbody>
   </table>
+  <div *ngIf="!loadingTeamUsers && team_users.length === 0">
+    <h3>No hay resultados</h3>
+  </div>
   <ng-container *ngIf="loadingTeamUsers">
     <app-loading></app-loading>
   </ng-container>

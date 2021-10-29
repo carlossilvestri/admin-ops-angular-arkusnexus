@@ -95,33 +95,67 @@ export class TeamUserService {
     );
   }
 
-    /**
+  /**
    * Get a list of team_users by user_name registered on the system.
    * @param user_name: string
    * @returns Observable<GetTeamUserResponse>
    */
-     getTeamUserByUserName(user_name: string): Observable<GetTeamUserResponse> {
-      const url = `${this.url}/team_user-by-user-name?user_name=${user_name}`;
-      return this.http.get<GetTeamUserResponse>(url).pipe(
-        map((resp: GetTeamUserResponse) => {
-          return resp;
-        })
-      );
-    }
-
-    /**
+  getTeamUserByUserName(user_name: string): Observable<GetTeamUserResponse> {
+    const url = `${this.url}/team_user-by-user-name?user_name=${user_name}`;
+    return this.http.get<GetTeamUserResponse>(url).pipe(
+      map((resp: GetTeamUserResponse) => {
+        return resp;
+      })
+    );
+  }
+  /**
+   * Get a list of team_users by user_name registered on the system.
+   * @param desde:number,ending_date: string
+   * @returns Observable<GetTeamUserResponse>
+   */
+   getTeamUserByEndingDate(
+    desde: number,
+    ending_date: string
+  ): Observable<GetTeamUserResponse> {
+    let formated_date = `${ending_date}T00:00:00.000Z`;
+    const url = `${this.url}/team_user_by_ending_date?desde=${desde}&ending_date=${formated_date}`;
+    return this.http.get<GetTeamUserResponse>(url).pipe(
+      map((resp: GetTeamUserResponse) => {
+        return resp;
+      })
+    );
+  }
+  /**
+   * Get a list of team_users by user_name registered on the system.
+   * @param desde:number,beggining_date: string
+   * @returns Observable<GetTeamUserResponse>
+   */
+  getTeamUserByBegginingDate(
+    desde: number,
+    beggining_date: string
+  ): Observable<GetTeamUserResponse> {
+    let formated_date = `${beggining_date}T00:00:00.000Z`;
+    console.log('formated_date ', formated_date);
+    const url = `${this.url}/team_user_by_beggining_date?desde=${desde}&beggining_date=${formated_date}`;
+    return this.http.get<GetTeamUserResponse>(url).pipe(
+      map((resp: GetTeamUserResponse) => {
+        return resp;
+      })
+    );
+  }
+  /**
    * Get a list of team_users registered on the system.
    * @param id_team_user: number
    * @returns Observable<GetByIdTeamUserResponse>
    */
-     getTeamUserById(id_team_user: number): Observable<GetByIdTeamUserResponse> {
-      const url = `${this.url}/team_user/${id_team_user}`;
-      return this.http.get<GetByIdTeamUserResponse>(url).pipe(
-        map((resp: GetByIdTeamUserResponse) => {
-          return resp;
-        })
-      );
-    }
+  getTeamUserById(id_team_user: number): Observable<GetByIdTeamUserResponse> {
+    const url = `${this.url}/team_user/${id_team_user}`;
+    return this.http.get<GetByIdTeamUserResponse>(url).pipe(
+      map((resp: GetByIdTeamUserResponse) => {
+        return resp;
+      })
+    );
+  }
   /**
    * Get a list of team_users registered on the system by id_user_f.
    * @param desde: number

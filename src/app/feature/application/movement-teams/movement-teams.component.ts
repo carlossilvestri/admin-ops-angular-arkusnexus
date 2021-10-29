@@ -5,6 +5,7 @@ import { HelpersService } from 'src/app/shared/services/helpers/helpers.service'
 import { TeamService } from 'src/app/shared/services/team/team.service';
 import { TeamUserService } from 'src/app/shared/services/team_user/team-user.service';
 import { Team } from '../../../core/interfaces/team-requests.interface';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-movement-teams',
@@ -18,6 +19,7 @@ export class MovementTeamsComponent implements OnInit {
   */
   filterBy: string = 'TEAM';
   team_users: TeamUser[];
+  beggining_date: string = '';
   desde: number = 0;
   loadingTeams: boolean = false;
   teams: Team[];
@@ -28,14 +30,14 @@ export class MovementTeamsComponent implements OnInit {
   constructor(
     public router: Router,
     public teamUserService: TeamUserService,
-    public teamService : TeamService,
-    public helpersService: HelpersService
+    public teamService: TeamService,
+    public helpersService: HelpersService,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
     this.fetchTeams();
     this.fetchTeamUsers();
-
   }
   fetchTeams(): void {
     this.loadingTeams = true;
@@ -44,9 +46,28 @@ export class MovementTeamsComponent implements OnInit {
       this.loadingTeams = false;
     });
   }
-  fetchUserTeamsByTeamId(): void{
+  fetchUserTeamsByTeamId(): void {
     this.loadingTeamUsers = true;
-    this.teamUserService.getTeamUsersByTeamId(this.desde, this.id_team).subscribe(
+    this.teamUserService
+      .getTeamUsersByTeamId(this.desde, this.id_team)
+      .subscribe(
+        (resp) => {
+          this.loadingTeamUsers = false;
+          this.thereWasAnError = false;
+          this.team_users = resp.team_users;
+          console.log('resp ', resp);
+        },
+        (err) => {
+          console.log('err ', err);
+          this.loadingTeamUsers = false;
+          this.thereWasAnError = true;
+        }
+      );
+  }
+  fetchUserTeamsByBegginingDate(date: string): void {
+    console.log('date ', date);
+    this.loadingTeamUsers = true;
+    this.teamUserService.getTeamUserByBegginingDate(this.desde, date).subscribe(
       (resp) => {
         this.loadingTeamUsers = false;
         this.thereWasAnError = false;
@@ -60,8 +81,24 @@ export class MovementTeamsComponent implements OnInit {
       }
     );
   }
-
-  searchTeamUsersByName(user_name : string) : void{
+  fetchUserTeamsByEndingDate(date: string): void {
+    console.log('date ', date);
+    this.loadingTeamUsers = true;
+    this.teamUserService.getTeamUserByEndingDate(this.desde, date).subscribe(
+      (resp) => {
+        this.loadingTeamUsers = false;
+        this.thereWasAnError = false;
+        this.team_users = resp.team_users;
+        console.log('resp ', resp);
+      },
+      (err) => {
+        console.log('err ', err);
+        this.loadingTeamUsers = false;
+        this.thereWasAnError = true;
+      }
+    );
+  }
+  searchTeamUsersByName(user_name: string): void {
     this.loadingTeamUsers = true;
     this.teamUserService.getTeamUserByUserName(user_name).subscribe(
       (resp) => {
@@ -106,9 +143,34 @@ export class MovementTeamsComponent implements OnInit {
   onChangeRadioButton(event: any) {
     this.changeFilter(event.target.value);
   }
+  onChangeBegginingDate(event: any) {
+    console.log('event.target.value ', event.target.value);
+    this.fetchUserTeamsByBegginingDate(event.target.value);
+  }
+  onChangeEndingDate(event: any) {
+    console.log('event.target.value ', event.target.value);
+    this.fetchUserTeamsByEndingDate(event.target.value);
+  }
   updatePage(event: number) {
     // console.log('Evento updatePage llamado: ', event);
     this.desde = event;
     this.fetchTeamUsers();
+  }
+
+  /**
+   * Formats the date to mm/dd/yyyy
+   * @param date : Date
+   * @returns string
+   */
+  getFormatedDate(date: Date): string {
+    let fechaFormateada: string = this.datePipe.transform(
+      new Date(date),
+      'yyyy-MM-dd'
+    );
+    let arrayDatefechaFormateada: string[] = fechaFormateada.split('-');
+    let ultimoDigitoFecha: number = Number(arrayDatefechaFormateada[2]) + 1;
+    arrayDatefechaFormateada[2] = ultimoDigitoFecha.toString();
+    fechaFormateada = arrayDatefechaFormateada.join('-');
+    return fechaFormateada;
   }
 }

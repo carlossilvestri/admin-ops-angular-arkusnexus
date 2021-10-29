@@ -11,6 +11,7 @@ import {
   CreateTeamUserResponse,
   EditTeamUserRequest,
   EditTeamUserResponse,
+  GetByIdTeamUserResponse,
   GetTeamUserResponse,
   UpdateIsActiveTeamUserRequest,
   UpdateIsActiveTeamUserResponse,
@@ -33,7 +34,7 @@ export class TeamUserService {
    * @param team: CreateTeamUserRequest
    * @returns Observable<CreateTeamUserResponse>
    */
-  createTeam(
+  createTeamUser(
     team_user: CreateTeamUserRequest
   ): Observable<CreateTeamUserResponse> {
     const url = `${this.url}/team_user`;
@@ -50,10 +51,10 @@ export class TeamUserService {
    * @param dataEditTeamUser: EditTeamUserRequest
    * @returns Observable<EditTeamUserResponse>
    */
-  editTeam(
+  editTeamUser(
     dataEditTeamUser: EditTeamUserRequest
   ): Observable<EditTeamUserResponse> {
-    let url = `${this.url}/team/${dataEditTeamUser.id_team_user}`;
+    let url = `${this.url}/team_user/${dataEditTeamUser.id_team_user}`;
     return this.http.put<EditTeamUserResponse>(url, dataEditTeamUser).pipe(
       map((resp: EditTeamUserResponse) => {
         Swal.fire('Correcto', 'Se ha editado correctamente.', 'success');
@@ -93,6 +94,34 @@ export class TeamUserService {
       })
     );
   }
+
+    /**
+   * Get a list of team_users by user_name registered on the system.
+   * @param user_name: string
+   * @returns Observable<GetTeamUserResponse>
+   */
+     getTeamUserByUserName(user_name: string): Observable<GetTeamUserResponse> {
+      const url = `${this.url}/team_user-by-user-name?user_name=${user_name}`;
+      return this.http.get<GetTeamUserResponse>(url).pipe(
+        map((resp: GetTeamUserResponse) => {
+          return resp;
+        })
+      );
+    }
+
+    /**
+   * Get a list of team_users registered on the system.
+   * @param id_team_user: number
+   * @returns Observable<GetByIdTeamUserResponse>
+   */
+     getTeamUserById(id_team_user: number): Observable<GetByIdTeamUserResponse> {
+      const url = `${this.url}/team_user/${id_team_user}`;
+      return this.http.get<GetByIdTeamUserResponse>(url).pipe(
+        map((resp: GetByIdTeamUserResponse) => {
+          return resp;
+        })
+      );
+    }
   /**
    * Get a list of team_users registered on the system by id_user_f.
    * @param desde: number

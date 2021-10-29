@@ -28,6 +28,7 @@ const routes: Routes = [
         component: MovementTeamsComponent,
       },
       { path: 'movement-teams/:id', component: MovementTeamComponent },
+      { path: 'create-movement-teams', component: MovementTeamComponent },
       { path: 'create-team', component: TeamComponent },
       { path: 'accounts/:id', component: AccountComponent },
       { path: 'create-account', component: AccountComponent },

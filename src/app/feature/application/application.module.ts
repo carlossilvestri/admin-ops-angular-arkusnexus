@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ApplicationRoutingModule } from './application-routing.module';
+import { DatePipe } from '@angular/common';
 // import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyUserComponent } from './my-user/my-user.component';
@@ -35,6 +36,9 @@ import { LoadingComponent } from '../../shared/components/loading/loading.compon
     AccountComponent,
     TeamComponent,
     LoadingComponent
+  ],
+  providers: [
+    DatePipe
   ],
   imports: [
     CommonModule,

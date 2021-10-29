@@ -26,16 +26,15 @@
       </label>
     </div>
   </div>
-  <div class="d-flex align-items-center justify-content-start">
-    <select class="form-select mx-3" aria-label="Default select example" *ngIf="filterBy === 'TEAM'">
-      <option selected>Buscar por nombre de equipo</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
+  <div class="d-flex align-items-center justify-content-start my-3">
+    <select class="form-select mx-3" aria-label="Default select example" *ngIf="filterBy === 'TEAM' && !loadingTeams" (change)="onTeamChange($event)">
+      <option value="0" disabled selected>Buscar por nombre de equipo</option>
+      <option [value]="team.id_team" *ngFor="let team of teams">{{ team.name }}</option>
     </select>
     <app-search-bar
       *ngIf="filterBy === 'USER'"
       [textBar]="'Buscar por nombre de usuario...'"
+      (changeText)="searchTeamUsersByName($event)"
     ></app-search-bar>
   </div>
   <div class="d-flex align-items-center justify-content-between">
@@ -48,6 +47,13 @@
       <input type="date" name="" id="">
     </div>
   </div>
+  <button
+  type="button"
+  class="btn btn-success m-1"
+  routerLink="/application/create-movement-teams"
+  >
+  Agregar
+</button>
   <table class="table my-2">
     <thead>
       <tr>

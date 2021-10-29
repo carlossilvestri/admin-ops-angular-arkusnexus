@@ -1,21 +1,23 @@
-<div class="cont-my-user">
-      <select class="form-select m-3" aria-label="Default select example"  *ngIf="!loadingUsers">
-        <option disabled value="0">Selecciona un usuario</option>
-        <option [value]="user.id_user" *ngFor="let user of users">{{ user.name }}</option>
-      </select>
-      <select class="form-select mx-3" aria-label="Default select example"  *ngIf="!loadingTeams">
-        <option disabled value="0">Selecciona un equipo</option>
-        <option [value]="team.id_team" *ngFor="let team of teams">{{ team.name }}</option>
-      </select>
-      <div class="input-group input-group-sm m-3">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de inicio*</span>
-        <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-      </div>
-      <div class="input-group input-group-sm m-3">
-        <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de Finalización*</span>
-        <input type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-      </div>
-      <div class="d-flex align-items-center justify-content-center">
-        <button type="button" class="btn btn-outline-success">Guardar</button>
-      </div>
-</div>
+<ng-container *ngIf="!loadingTeamUser">
+  <form class="cont-my-user" [formGroup]="forma">
+        <select class="form-select m-3" aria-label="Default select example"  *ngIf="!loadingUsers" formControlName="id_user_f">
+          <option disabled value="0">Selecciona un usuario</option>
+          <option [value]="user.id_user" *ngFor="let user of users">{{ user.name }}</option>
+        </select>
+        <select class="form-select mx-3" aria-label="Default select example"  *ngIf="!loadingTeams" formControlName="id_team_f" >
+          <option disabled value="0">Selecciona un equipo</option>
+          <option [value]="team.id_team" *ngFor="let team of teams">{{ team.name }}</option>
+        </select>
+        <div class="input-group input-group-sm m-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de inicio*</span>
+          <input formControlName="beggining_date"  type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="input-group input-group-sm m-3">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Fecha de Finalización*</span>
+          <input formControlName="ending_date" type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+          <button type="button" class="btn btn-outline-success" (click)="updateTeamUser()">Guardar</button>
+        </div>
+  </form>
+</ng-container>

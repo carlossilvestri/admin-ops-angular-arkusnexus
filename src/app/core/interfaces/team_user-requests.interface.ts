@@ -9,7 +9,7 @@ export interface GetTeamUserResponse {
 export interface GetTeamUserByUserResponse {
     ok:                                 boolean;
     team_user_quantity_for_the_request: number;
-    team_users:                         any[];
+    team_users:                         TeamUser[];
 }
 export interface GetTeamUserByTeamResponse {
     ok:                                 boolean;
@@ -42,12 +42,15 @@ export interface CreateTeamUserResponse {
     ok:        boolean;
     team_user: TeamUser;
 }
-
 export interface CreateTeamUserRequest {
     beggining_date: Date;
     ending_date:    Date;
     id_user_f:      number;
     id_team_f:      number;
+}
+export interface GetByIdTeamUserResponse {
+    ok:        boolean;
+    team_user: TeamUser;
 }
 export interface DeleteTeamUserResponse {
     ok:  boolean;

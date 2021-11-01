@@ -1,2 +1,10 @@
 // Construir la imagen
 docker build -t angular-11-alpine .
+
+// Crear la imagen
+docker build -t angular-arkusnexus . 
+// Correr el contenedor
+docker run -it -p 4201:4201 angular-arkusnexus
+docker run -it -p 8000:4201 angular-arkusnexus
+
+docker-compose up
